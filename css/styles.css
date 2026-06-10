@@ -2,8 +2,10 @@
    THE TIDE PLAYBOOK — Blue Crab Strategies
    A climate-narrative playbook for foundations · London Climate Week
    --------------------------------------------------------------------------
-   Premium, editorial, optimistic, a little playful.
-   Fraunces (display serif) + Inter (body/UI) on a deep-ocean dark theme.
+   Brand restyle: light, minimal, confident.
+   White ground with full-bleed color-blocked sections (white → deep navy →
+   slate teal). Rajdhani (squared display sans) + Inter (body/UI).
+   Restrained tonal navy/teal palette. No serif, no italics in headings.
    ========================================================================== */
 
 
@@ -13,19 +15,19 @@
 
 :root {
   /* Palette */
-  --abyss:    #041C2C;                    /* page background, deep ocean ink  */
-  --ink:      #07273A;                    /* section alt background           */
-  --tidepool: #0E3A50;                    /* card backgrounds                 */
-  --foam:     #F5F0E6;                    /* primary text, warm sand/foam     */
-  --foam-dim: rgba(245, 240, 230, 0.72);  /* secondary text                   */
-  --coral:    #FF5C45;                    /* primary accent — crab coral      */
-  --gold:     #FFB347;
-  --seaglass: #4FB8A8;
-  --skyline:  #7FA8FF;
-  --line:     rgba(245, 240, 230, 0.14);  /* hairline borders                 */
+  --navy:       #27396B;                    /* primary brand navy             */
+  --navy-deep:  #1E2D55;                    /* darker navy, footer/panel depth */
+  --slate:      #74A0AB;                    /* muted slate teal, secondary    */
+  --slate-deep: #3F6E7A;                    /* darker slate, accents on white */
+  --paper:      #FFFFFF;                    /* page background                */
+  --mist:       #F4F6F8;                    /* alt light section background   */
+  --body:       #46536A;                    /* body text on light             */
+  --line:       #E1E6ED;                    /* hairlines on light             */
+  --line-dark:  rgba(255, 255, 255, 0.22);  /* hairlines on navy/slate        */
+  --paper-dim:  rgba(255, 255, 255, 0.78);  /* secondary text on dark         */
 
   /* Type */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display: 'Rajdhani', 'Arial Narrow', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -54,11 +56,11 @@ html {
 }
 
 body {
-  background: var(--abyss);
-  color: var(--foam);
+  background: var(--paper);
+  color: var(--body);
   font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -80,13 +82,22 @@ button {
 }
 
 ::selection {
-  background: var(--coral);
-  color: var(--abyss);
+  background: var(--navy);
+  color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--coral);
+  outline: 2px solid var(--navy);
   outline-offset: 3px;
+}
+
+/* Focus rings need to stay visible on navy/slate blocks */
+.why :focus-visible,
+.builder :focus-visible,
+.footer :focus-visible,
+.prompts :focus-visible,
+.marquee :focus-visible {
+  outline-color: var(--slate);
 }
 
 
@@ -94,50 +105,56 @@ button {
    3. TYPOGRAPHY
    ========================================================================== */
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4,
+.stat-num,
+.agenda-time,
+.play-title,
+.tide-letter,
+.btn,
+.chip,
+.nav-badge,
+.kicker,
+.section-kicker {
   font-family: var(--font-display);
-  font-weight: 600;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
   line-height: 1.12;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
+  color: var(--navy);
 }
 
 h1 {
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  font-weight: 560;
-  line-height: 1.04;
-  font-variation-settings: 'opsz' 144;
+  font-size: clamp(3rem, 7.5vw, 6rem);
+  line-height: 1.02;
 }
 
 h2 {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  font-variation-settings: 'opsz' 100;
+  font-size: clamp(2.1rem, 4.5vw, 3.6rem);
+  line-height: 1.08;
 }
 
-/* Italic coral emphasis inside display headings */
+/* Emphasis inside display headings: color, never italics (Rajdhani has none) */
 h1 em,
 h2 em {
-  font-style: italic;
-  color: var(--coral);
-}
-
-blockquote {
-  font-family: var(--font-display);
+  font-style: normal;
+  color: var(--slate-deep);
 }
 
 strong {
-  color: var(--foam);
+  color: var(--navy);
   font-weight: 600;
 }
 
 /* Kickers — small uppercase wayfinding labels */
 .kicker,
 .section-kicker {
-  font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--slate-deep);
   margin-bottom: 0;
 }
 
@@ -148,7 +165,7 @@ section h2 {
 
 .section-lede {
   max-width: 720px;
-  color: var(--foam-dim);
+  color: var(--body);
   font-size: 1.1rem;
   margin-top: 20px;
 }
@@ -192,12 +209,13 @@ section h2 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
+  padding: 14px 30px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
@@ -205,24 +223,25 @@ section h2 {
               border-color 0.2s ease, color 0.2s ease;
 }
 
+/* Primary (class name kept for JS/HTML compatibility) */
 .btn-coral {
-  background: var(--coral);
-  color: var(--abyss);
+  background: var(--navy);
+  color: #fff;
 }
 
 .btn-coral:hover {
-  background: #e84e38; /* coral, slightly darkened */
+  background: var(--navy-deep);
   transform: translateY(-2px);
 }
 
 .btn-ghost {
   background: transparent;
-  border: 1px solid var(--line);
-  color: var(--foam);
+  border: 1px solid var(--navy);
+  color: var(--navy);
 }
 
 .btn-ghost:hover {
-  border-color: var(--coral);
+  background: rgba(39, 57, 107, 0.06);
   transform: translateY(-2px);
 }
 
@@ -230,18 +249,36 @@ section h2 {
   transform: translateY(0);
 }
 
+/* Buttons inside dark (navy) sections invert */
+.builder .btn-coral {
+  background: #fff;
+  color: var(--navy);
+}
+
+.builder .btn-coral:hover {
+  background: var(--mist);
+}
+
+.builder .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.builder .btn-ghost:hover {
+  border-color: #fff;
+  background: transparent;
+}
+
 
 /* ==========================================================================
-   6. NAV
+   6. NAV  — white, sticky
    ========================================================================== */
 
 .nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(4, 28, 44, 0.8);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--line);
 }
 
@@ -256,28 +293,31 @@ section h2 {
 }
 
 .brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--foam);
+  color: var(--navy);
 }
 
-.brand-mark {
-  font-size: 1.25rem;
-  line-height: 1;
+.brand-mark svg {
+  width: 30px;
+  height: 30px;
+  color: var(--navy);
+  display: block;
 }
 
 .brand-name {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .brand-name em {
-  font-style: italic;
-  color: var(--coral);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--slate-deep);
 }
 
 .nav-links {
@@ -287,27 +327,28 @@ section h2 {
 }
 
 .nav-links a {
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 500;
-  color: var(--foam-dim);
+  color: var(--body);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: var(--coral);
+  color: var(--navy);
 }
 
 .nav-badge {
   display: inline-block;
-  border: 1px solid var(--coral);
+  border: 1px solid var(--navy);
   border-radius: 999px;
   padding: 5px 14px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--navy);
   white-space: nowrap;
 }
 
@@ -325,38 +366,50 @@ section h2 {
 
 
 /* ==========================================================================
-   7. HERO
+   7. HERO — white, centered, the line-crab mark as visual anchor
    ========================================================================== */
 
 .hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 88vh;
   display: grid;
   place-items: center;
   overflow: hidden;
   text-align: center;
-  background:
-    radial-gradient(900px 600px at 82% -10%, rgba(255, 92, 69, 0.12), transparent 65%),
-    radial-gradient(900px 650px at 8% 105%, rgba(79, 184, 168, 0.12), transparent 65%),
-    var(--abyss);
+  background: var(--paper);
 }
 
 .hero-inner {
   position: relative;
   z-index: 2;
   max-width: 880px;
-  padding: 120px 24px 140px; /* room for the marquee below */
+  padding: 100px 24px 140px; /* room for the marquee below */
+}
+
+.hero-mark svg {
+  width: clamp(120px, 18vw, 200px);
+  height: auto;
+  color: var(--navy);
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 8px;
 }
 
 .hero h1 {
   margin-top: 20px;
+  color: var(--navy);
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--slate-deep);
 }
 
 .hero-sub {
   max-width: 640px;
   margin-inline: auto;
   margin-top: 26px;
-  color: var(--foam-dim);
+  color: var(--body);
   font-size: 1.125rem;
 }
 
@@ -368,7 +421,7 @@ section h2 {
   margin-top: 36px;
 }
 
-/* --- Ambient drifting waves -------------------------------------------- */
+/* --- Ambient drifting bands — barely-there slate texture on white -------- */
 
 .hero-waves {
   position: absolute;
@@ -381,27 +434,27 @@ section h2 {
   position: absolute;
   left: -30vw;
   width: 160vw;
-  height: 40vh;
+  height: 32vh;
   border-radius: 45%;
   filter: blur(60px);
   will-change: transform;
 }
 
 .wave-1 {
-  bottom: -18vh;
-  background: rgba(14, 58, 80, 0.55); /* tidepool */
+  bottom: -16vh;
+  background: rgba(116, 160, 171, 0.12);
   animation: drift 18s ease-in-out infinite alternate;
 }
 
 .wave-2 {
-  bottom: -24vh;
-  background: rgba(79, 184, 168, 0.18); /* seaglass */
+  bottom: -22vh;
+  background: rgba(116, 160, 171, 0.09);
   animation: drift 26s ease-in-out infinite alternate-reverse;
 }
 
 .wave-3 {
-  bottom: -30vh;
-  background: rgba(127, 168, 255, 0.15); /* skyline */
+  bottom: -28vh;
+  background: rgba(116, 160, 171, 0.06);
   animation: drift 34s ease-in-out infinite alternate;
 }
 
@@ -410,7 +463,7 @@ section h2 {
   to   { transform: translateX(6vw) rotate(1deg); }
 }
 
-/* --- Marquee ------------------------------------------------------------ */
+/* --- Marquee — full-width navy strip ------------------------------------- */
 
 .marquee {
   position: absolute;
@@ -419,9 +472,9 @@ section h2 {
   width: 100%;
   z-index: 3;
   overflow: hidden;
-  padding-block: 14px;
-  border-top: 1px solid var(--line);
-  background: rgba(4, 28, 44, 0.6);
+  padding-block: 16px;
+  border: none;
+  background: var(--navy);
 }
 
 .marquee-track {
@@ -430,9 +483,11 @@ section h2 {
   gap: 28px;
   white-space: nowrap;
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 15px;
-  color: var(--foam-dim);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
   animation: marquee 40s linear infinite;
 }
 
@@ -443,7 +498,7 @@ section h2 {
 
 /* the ◆ separators */
 .marquee-track span:nth-child(even) {
-  color: var(--coral);
+  color: var(--slate);
   font-size: 8px;
 }
 
@@ -454,51 +509,72 @@ section h2 {
 
 
 /* ==========================================================================
-   8. WHY — THE CASE FOR STORY
+   8. WHY (01) — NAVY color block
    ========================================================================== */
 
 .why {
-  background: var(--ink);
+  background: var(--navy);
 }
+
+.why h2 {
+  color: #fff;
+}
+
+.why .section-kicker {
+  color: var(--slate);
+}
+
+.why .section-lede {
+  color: var(--paper-dim);
+}
+
+.why .section-lede strong {
+  color: #fff;
+}
+
+/* --- Stats: hairline grid -------------------------------------------------- */
 
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;                     /* hairline gutters... */
-  background: var(--line);      /* ...painted by the grid background */
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  gap: 1px;                       /* hairline gutters...                 */
+  background: var(--line-dark);   /* ...painted by the grid background   */
+  border: 1px solid var(--line-dark);
+  border-radius: 14px;
   overflow: hidden;
   margin-block: 56px;
 }
 
 .stat {
-  background: var(--ink);
+  background: var(--navy);
   padding: 32px 28px;
 }
 
 .stat-num {
   display: block;
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 5vw, 4rem);
-  font-weight: 600;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 700;
   line-height: 1;
-  color: var(--coral);
+  color: #fff;
   margin-bottom: 12px;
   font-variant-numeric: tabular-nums;
 }
 
 .stat p {
   font-size: 14.5px;
-  color: var(--foam-dim);
+  color: var(--paper-dim);
+}
+
+.stat em {
+  font-style: normal;
+  color: #fff;
 }
 
 .src {
   display: block;
   margin-top: 8px;
   font-size: 12px;
-  font-style: italic;
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
 @media (max-width: 900px) {
@@ -513,38 +589,39 @@ section h2 {
   }
 }
 
-/* Pull quote */
+/* Pull quote — Rajdhani, no italics, slate rule */
 blockquote.pull {
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
-  font-weight: 400;
-  line-height: 1.35;
+  font-style: normal;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.3;
   max-width: 760px;
   margin: 64px auto 0;
   padding-left: 28px;
-  border-left: 3px solid var(--coral);
-  color: var(--foam);
+  border-left: 3px solid var(--slate);
+  color: #fff;
 }
 
 
 /* ==========================================================================
-   9. TIDE — THE FRAMEWORK
+   9. TIDE (02) — WHITE section, accent-topped cards
    ========================================================================== */
 
 .tide {
-  background: var(--abyss);
+  background: var(--paper);
 }
 
 h2 .tide-sub {
   display: block;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 0.45em;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.42em;
   font-weight: 400;
-  color: var(--foam-dim);
-  margin-top: 8px;
-  letter-spacing: 0;
+  color: var(--body);
+  margin-top: 10px;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .tide-grid {
@@ -554,32 +631,39 @@ h2 .tide-sub {
   margin-top: 56px;
 }
 
+/* HTML supplies --accent per card: #27396B / #3F6E7A / #74A0AB / #5577A8 */
 .tide-card {
   position: relative;
-  background: var(--tidepool);
+  background: #fff;
   border: 1px solid var(--line);
-  border-top: 4px solid var(--accent, var(--coral));
-  border-radius: 20px;
+  border-top: 4px solid var(--accent, var(--navy));
+  border-radius: 14px;
   padding: 36px 32px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tide-card:hover {
+  border-color: var(--accent, var(--navy));
+  transform: translateY(-2px);
 }
 
 .tide-letter {
   display: block;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 4.5rem;
+  font-weight: 700;
+  font-size: 4.2rem;
   line-height: 1;
-  color: var(--accent, var(--coral));
+  color: var(--accent, var(--navy));
   margin-bottom: 8px;
 }
 
 .tide-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.45rem;
+  color: var(--navy);
   margin-bottom: 12px;
 }
 
 .tide-card p {
-  color: var(--foam-dim);
+  color: var(--body);
   font-size: 15.5px;
 }
 
@@ -594,7 +678,7 @@ h2 .tide-sub {
   padding-left: 22px;
   margin-bottom: 10px;
   font-size: 14.5px;
-  color: var(--foam-dim);
+  color: var(--body);
 }
 
 .tide-card li::before {
@@ -602,8 +686,8 @@ h2 .tide-sub {
   position: absolute;
   left: 0;
   top: 6px;
-  font-size: 9px;
-  color: var(--accent, var(--coral));
+  font-size: 8px;
+  color: var(--accent, var(--navy));
 }
 
 @media (max-width: 820px) {
@@ -614,14 +698,14 @@ h2 .tide-sub {
 
 
 /* ==========================================================================
-   10. CASES — THE CASE FILES
+   10. CASES (03) — MIST section, white accordion cards
    ========================================================================== */
 
 .cases {
-  background: var(--ink);
+  background: var(--mist);
 }
 
-/* --- Filter chips -------------------------------------------------------- */
+/* --- Filter chips ---------------------------------------------------------- */
 
 .filters {
   display: flex;
@@ -633,29 +717,29 @@ h2 .tide-sub {
 .chip {
   padding: 9px 20px;
   border-radius: 999px;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--foam-dim);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
+  border: 1px solid #C9D2DD;
+  background: #fff;
+  color: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .chip:hover {
-  border-color: var(--coral);
-  color: var(--foam);
+  border-color: var(--navy);
+  color: var(--navy);
 }
 
 .chip.is-active {
-  background: var(--coral);
-  color: var(--abyss);
-  border-color: var(--coral);
-  font-weight: 600;
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
 }
 
-/* --- Case accordion cards ------------------------------------------------ */
+/* --- Case accordion cards --------------------------------------------------- */
 
 .case-grid {
   display: grid;
@@ -664,15 +748,15 @@ h2 .tide-sub {
 }
 
 details.case {
-  background: var(--tidepool);
+  background: #fff;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 12px;
   overflow: hidden;
   transition: border-color 0.2s ease;
 }
 
 details.case[open] {
-  border-color: rgba(255, 92, 69, 0.5);
+  border-color: var(--navy);
 }
 
 /* JS filter hook */
@@ -698,17 +782,18 @@ details.case.is-hidden {
   display: none;
 }
 
+/* HTML supplies tonal --tag colors per card */
 .case-tag {
   grid-area: tag;
   justify-self: start;
-  font-size: 11.5px;
+  font-family: var(--font-display);
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--tag, var(--coral));
-  border: 1px solid rgba(245, 240, 230, 0.3); /* fallback */
-  border-color: color-mix(in srgb, var(--tag, var(--coral)) 50%, transparent);
-  padding: 4px 12px;
+  color: var(--tag, var(--navy));
+  border: 1px solid var(--tag, var(--navy));
+  padding: 3px 12px;
   border-radius: 999px;
   margin-bottom: 12px;
 }
@@ -716,15 +801,17 @@ details.case.is-hidden {
 .case h3 {
   grid-area: title;
   font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  color: var(--navy);
 }
 
 .case h3 em {
-  font-style: italic;
+  font-style: normal;
+  color: var(--slate-deep);
 }
 
 .case-hook {
   grid-area: hook;
-  color: var(--foam-dim);
+  color: var(--body);
   font-size: 15px;
   margin-top: 6px;
 }
@@ -738,10 +825,10 @@ details.case.is-hidden {
   border: 1px solid var(--line);
   border-radius: 50%;
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 300;
+  font-size: 26px;
+  font-weight: 500;
   line-height: 1;
-  color: var(--coral);
+  color: var(--navy);
   transition: transform 0.25s ease;
 }
 
@@ -749,7 +836,7 @@ details[open] .case-toggle {
   transform: rotate(45deg);
 }
 
-/* --- Expanded body -------------------------------------------------------- */
+/* --- Expanded body ----------------------------------------------------------- */
 
 .case-body {
   padding: 0 32px 32px;
@@ -757,39 +844,44 @@ details[open] .case-toggle {
 }
 
 .case-body h4 {
-  font-family: var(--font-body);
-  font-size: 12px;
+  font-family: var(--font-display);
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--slate-deep);
   margin: 22px 0 8px;
 }
 
 .case-body p {
-  color: var(--foam-dim);
+  color: var(--body);
   font-size: 15.5px;
+}
+
+.case-body strong {
+  color: var(--navy);
 }
 
 .steal {
   margin-top: 26px;
-  background: rgba(255, 92, 69, 0.08);
-  border: 1px dashed rgba(255, 92, 69, 0.45);
-  border-radius: 14px;
+  background: rgba(116, 160, 171, 0.12);
+  border: 1px dashed var(--slate-deep);
+  border-radius: 10px;
   padding: 18px 22px;
   font-size: 15px;
-  color: var(--foam);
+  color: #2E3A52;
 }
 
 .steal span {
   display: inline-block;
-  background: var(--coral);
-  color: var(--abyss);
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font-display);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 3px 9px;
   margin-right: 10px;
   transform: translateY(-1px);
@@ -814,17 +906,33 @@ details[open] .case-toggle {
 
 
 /* ==========================================================================
-   11. PLAY BUILDER
+   11. PLAY BUILDER (04) — NAVY color block
    ========================================================================== */
 
 .builder {
-  background: var(--abyss);
+  background: var(--navy);
+}
+
+.builder h2 {
+  color: #fff;
+}
+
+.builder .section-kicker {
+  color: var(--slate);
+}
+
+.builder .section-lede {
+  color: var(--paper-dim);
+}
+
+.builder .section-lede strong {
+  color: #fff;
 }
 
 .builder-panel {
-  background: var(--tidepool);
-  border: 1px solid var(--line);
-  border-radius: 24px;
+  background: var(--navy-deep);
+  border: 1px solid var(--line-dark);
+  border-radius: 18px;
   padding: 40px;
   margin-top: 48px;
 }
@@ -838,11 +946,12 @@ details[open] .case-toggle {
 
 .builder-controls label span {
   display: block;
+  font-family: var(--font-display);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--foam-dim);
+  color: var(--paper-dim);
   margin-bottom: 8px;
 }
 
@@ -850,13 +959,13 @@ details[open] .case-toggle {
   width: 100%;
   appearance: none;
   -webkit-appearance: none;
-  background-color: var(--ink);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F5F0E6' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2327396B' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  color: var(--foam);
+  border: none;
+  border-radius: 8px;
+  color: var(--navy);
   padding: 14px 44px 14px 16px;
   font-family: var(--font-body);
   font-size: 15px;
@@ -864,7 +973,7 @@ details[open] .case-toggle {
 }
 
 .builder-controls select:focus {
-  outline: 2px solid var(--coral);
+  outline: 2px solid var(--slate);
   outline-offset: 2px;
 }
 
@@ -878,61 +987,64 @@ details[open] .case-toggle {
   }
 }
 
-/* --- The dealt card ------------------------------------------------------- */
+/* --- The dealt card ----------------------------------------------------------- */
 
 .play-card {
   margin-top: 32px;
   min-height: 120px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--ink);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--body);
   padding: 32px;
 }
 
 .play-empty {
   font-family: var(--font-display);
-  font-style: italic;
-  color: var(--foam-dim);
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--body);
+  opacity: 0.7;
   text-align: center;
   padding: 24px;
 }
 
 /* Content classes injected by JS */
 
-.play-title {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.play-title em {
-  font-style: italic;
-  color: var(--coral);
-}
-
 .play-meta {
+  font-family: var(--font-display);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--foam-dim);
+  color: var(--slate-deep);
   margin-bottom: 14px;
 }
 
-.play-section h5 {
-  font-family: var(--font-body);
-  font-size: 12px;
+.play-title {
+  font-size: 1.7rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+.play-title em {
+  font-style: normal;
+  color: var(--slate-deep);
+}
+
+.play-section h5 {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--slate-deep);
   margin: 18px 0 6px;
 }
 
 .play-card ol,
 .play-card ul {
-  color: var(--foam-dim);
+  color: var(--body);
   font-size: 15px;
   padding-left: 20px;
   margin-top: 6px;
@@ -947,8 +1059,8 @@ details[open] .case-toggle {
   padding-top: 14px;
   border-top: 1px solid var(--line);
   font-size: 13.5px;
-  font-style: italic;
-  color: var(--foam-dim);
+  color: var(--body);
+  opacity: 0.8;
 }
 
 /* Entrance animation when a play is dealt */
@@ -969,11 +1081,11 @@ details[open] .case-toggle {
 
 
 /* ==========================================================================
-   12. SESSION — IN THE ROOM
+   12. SESSION (05) — WHITE section + slate-teal prompts block
    ========================================================================== */
 
 .session {
-  background: var(--ink);
+  background: var(--paper);
 }
 
 ol.agenda {
@@ -993,20 +1105,20 @@ ol.agenda {
 }
 
 .agenda-time {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--coral);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
   font-variant-numeric: tabular-nums;
 }
 
 .agenda h3 {
   font-size: 1.25rem;
+  color: var(--navy);
   margin-bottom: 6px;
 }
 
 .agenda p {
-  color: var(--foam-dim);
+  color: var(--body);
   font-size: 15px;
 }
 
@@ -1017,20 +1129,20 @@ ol.agenda {
   }
 }
 
-/* --- Pub provocations ----------------------------------------------------- */
+/* --- Pub provocations — SLATE TEAL color block ------------------------------ */
 
 .prompts {
   margin-top: 56px;
-  background: var(--tidepool);
-  border-radius: 20px;
-  border-left: 4px solid var(--gold);
-  padding: 36px;
+  background: var(--slate);
+  border: none;
+  border-radius: 14px;
+  padding: 40px;
 }
 
 .prompts h3 {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
   margin-bottom: 16px;
 }
 
@@ -1045,7 +1157,7 @@ ol.agenda {
   padding-left: 22px;
   margin-bottom: 14px;
   font-size: 15.5px;
-  color: var(--foam-dim);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .prompts li::before {
@@ -1054,7 +1166,7 @@ ol.agenda {
   left: 0;
   top: 6px;
   font-size: 9px;
-  color: var(--gold);
+  color: var(--navy);
 }
 
 @media (max-width: 560px) {
@@ -1065,12 +1177,12 @@ ol.agenda {
 
 
 /* ==========================================================================
-   13. FOOTER
+   13. FOOTER — NAVY
    ========================================================================== */
 
 .footer {
-  background: var(--abyss);
-  border-top: 1px solid var(--line);
+  background: var(--navy);
+  border-top: none;
   padding: 72px 0 32px;
 }
 
@@ -1080,26 +1192,35 @@ ol.agenda {
   gap: 48px;
 }
 
+.footer-mark svg {
+  width: 26px;
+  height: 26px;
+  color: #fff;
+  display: inline-block;
+  vertical-align: -5px;
+  margin-right: 8px;
+}
+
 .footer-brand {
   font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
 }
 
 .footer-ethos {
-  color: var(--foam-dim);
-  font-style: italic;
+  color: var(--paper-dim);
+  font-style: normal;
   margin-top: 10px;
-  max-width: 360px;
+  max-width: 380px;
 }
 
 .footer-sources h4 {
-  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--foam-dim);
+  color: var(--slate);
   margin-bottom: 14px;
 }
 
@@ -1114,16 +1235,16 @@ ol.agenda {
 }
 
 .footer-sources a {
-  color: var(--foam-dim);
+  color: var(--paper-dim);
   font-size: 14px;
   text-decoration: underline;
-  text-decoration-color: rgba(255, 92, 69, 0.5);
+  text-decoration-color: rgba(255, 255, 255, 0.4);
   text-underline-offset: 3px;
   transition: color 0.2s ease;
 }
 
 .footer-sources a:hover {
-  color: var(--coral);
+  color: #fff;
 }
 
 .footer-fine {
@@ -1131,7 +1252,7 @@ ol.agenda {
   margin-top: 56px;
   padding-inline: 24px;
   font-size: 12.5px;
-  color: rgba(245, 240, 230, 0.4);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 760px) {
@@ -1178,6 +1299,7 @@ html.js .reveal.is-visible {
   .btn,
   .chip,
   .case-toggle,
+  .tide-card,
   details.case {
     transition: none;
   }
@@ -1193,20 +1315,21 @@ html.js .reveal.is-visible {
 /* ==========================================================================
    16. PRINT
    --------------------------------------------------------------------------
+   Light theme already prints well; flatten the dark blocks to white,
+   hide interactive chrome, and avoid breaking cards across pages.
    Note: CSS can't reliably force <details> open in print; closed case bodies
    stay collapsed unless JS opens them beforehand. Open cases print in full.
    ========================================================================== */
 
 @media print {
   :root {
-    --foam: #041C2C;
-    --foam-dim: rgba(4, 28, 44, 0.75);
-    --line: rgba(4, 28, 44, 0.25);
+    --paper-dim: rgba(39, 57, 107, 0.75);
+    --line-dark: rgba(39, 57, 107, 0.25);
   }
 
   body {
     background: #fff;
-    color: var(--abyss);
+    color: #2E3A52;
   }
 
   .why,
@@ -1215,7 +1338,10 @@ html.js .reveal.is-visible {
   .builder,
   .session,
   .hero,
-  .footer {
+  .footer,
+  .stat,
+  .prompts,
+  .builder-panel {
     background: #fff;
     padding-block: 40px;
     min-height: 0;
@@ -1231,15 +1357,33 @@ html.js .reveal.is-visible {
     display: none !important;
   }
 
-  .stat,
+  .why h2,
+  .builder h2,
+  .prompts h3,
+  .stat-num,
+  .footer-brand,
+  blockquote.pull {
+    color: var(--navy);
+  }
+
+  .stat p,
+  .prompts li,
+  .footer-ethos,
+  .footer-sources a,
+  .footer-fine {
+    color: #2E3A52;
+  }
+
+  .stat-grid {
+    border-color: var(--line);
+    background: var(--line);
+  }
+
+  details.case,
   .tide-card,
   .play-card {
     background: #fff;
-  }
-
-  details.case {
-    background: #fff;
-    border-color: rgba(4, 28, 44, 0.25);
+    border-color: var(--line);
   }
 
   details[open] > .case-body {
@@ -1254,11 +1398,7 @@ html.js .reveal.is-visible {
   }
 
   .steal {
-    background: rgba(255, 92, 69, 0.06);
-  }
-
-  .footer-sources a {
-    color: var(--abyss);
+    background: rgba(116, 160, 171, 0.08);
   }
 
   html.js .reveal {
